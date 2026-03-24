@@ -27,6 +27,27 @@ def test_division():
     assert simple_calculator("divide", -4, 2) == -2     # Test for negative and positive number
     assert simple_calculator("divide", 5, 2) == 2.5     # Test for division resulting in float
 
+
+def test_addition_with_floats():
+    assert simple_calculator("add", 5.5, 3.2) == pytest.approx(8.7)
+    assert simple_calculator("add", -2.5, 2.5) == pytest.approx(0)
+
+
+def test_subtraction_with_floats():
+    assert simple_calculator("subtract", 5.5, 3.2) == pytest.approx(2.3)
+    assert simple_calculator("subtract", 10, 2.5) == pytest.approx(7.5)
+
+
+def test_multiplication_with_floats():
+    assert simple_calculator("multiply", 2.5, 4) == pytest.approx(10)
+    assert simple_calculator("multiply", -1.5, 2) == pytest.approx(-3)
+
+
+def test_division_with_floats():
+    assert simple_calculator("divide", 7.5, 2.5) == pytest.approx(3)
+    assert simple_calculator("divide", 10, 4) == pytest.approx(2.5)
+
+
 def test_division_by_zero():
     with pytest.raises(ValueError, match="Cannot divide by zero."):
         simple_calculator("divide", 5, 0)               # Test division by zero
