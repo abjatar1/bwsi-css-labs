@@ -37,14 +37,40 @@ def simple_calculator(operation: str, num1: float, num2: float) -> float:
     else:
         raise ValueError("Invalid operation. Please choose from 'add', 'subtract', 'multiply', or 'divide'.")
 
+def req_sanitized_num(inputString: str) -> float:
+    '''
+    Function that requests and sanitizes user input.
+    This function is BLOCKING.
+
+    params: inputString (string)
+    returns: number (float) -> the sanitized number
+    '''
+    while True:
+        try:
+            number = float(input(inputString))
+            return number
+        except ValueError:
+            print("Input cannot be used. Please enter a valid number.")
+
+def ensureOption(prompt: str, options: list[str]) -> str:
+    '''
+    Guarantees a valid option of given options.
+    '''
+    while True:
+        inputOption = input(prompt).strip().lower()
+        if inputOption in options:
+            return inputOption
+        else:
+            print(f"Invalid option. Please use a valid option of {options}")
+
 def main():
     
     print(f"===== Simple Calculator =====")
 
     # Ask the user for sample input    
-    num1 = float(input("Enter the first number: "))
-    num2 = float(input("Enter the second number: "))
-    operation = input("Enter the operation (add, subtract, multiply, divide): ").strip().lower()
+    num1 = req_sanitized_num("Enter the first number: ")
+    num2 = req_sanitized_num("Enter the second number: ")
+    operation = ensureOption("Enter the operation (add, subtract, multiply, divide): ", ["add","subtract","multiply","divide"])
 
     # Perform the calculation and display the result
     result = simple_calculator(operation, num1, num2)
